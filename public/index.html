@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SongForge — AI Music Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🎵 SongForge</h1>
+    <p class="sub">Describe a song. Get two original tracks in about a minute.</p>
+    <span id="credits" class="pill">Credits: …</span>
+  </header>
+
+  <main>
+    <form id="form" class="card">
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab active" data-mode="simple">Simple</button>
+        <button type="button" class="tab" data-mode="custom">Custom</button>
+      </div>
+
+      <section data-panel="simple">
+        <label>Describe your song
+          <textarea name="prompt" rows="3" maxlength="3000" placeholder="An upbeat summer pop song about a road trip with friends"></textarea>
+        </label>
+      </section>
+
+      <section data-panel="custom" hidden>
+        <label>Title <input name="title" maxlength="80" placeholder="Midnight Drive" /></label>
+        <label>Lyrics
+          <textarea name="lyrics" rows="7" maxlength="5000" placeholder="[Verse]&#10;City lights are calling me...&#10;&#10;[Chorus]&#10;..."></textarea>
+        </label>
+        <label>Avoid (optional) <input name="negativeTags" maxlength="1000" placeholder="heavy metal, screaming" /></label>
+        <div class="row">
+          <label>Voice
+            <select name="vocalGender"><option value="">Any</option><option value="f">Female</option><option value="m">Male</option></select>
+          </label>
+          <label>Length (sec)
+            <input name="duration" type="number" min="10" max="360" placeholder="auto" />
+          </label>
+        </div>
+      </section>
+
+      <label>Style / genre
+        <input name="style" maxlength="1000" placeholder="indie pop, warm synths, 110 bpm" />
+      </label>
+      <div class="chips" id="chips"></div>
+
+      <div class="row">
+        <label>Model
+          <select name="model">
+            <option value="V6">V6 — best quality</option>
+            <option value="V6_MINI">V6 Mini — faster</option>
+            <option value="V6_WILD">V6 Wild — experimental</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" name="instrumental" /> Instrumental only</label>
+      </div>
+
+      <label id="passWrap" hidden>Passcode <input name="passcode" type="password" autocomplete="off" /></label>
+
+      <button id="go" type="submit" class="primary">Generate music</button>
+      <p id="msg" class="msg" role="status"></p>
+    </form>
+
+    <section id="results"></section>
+  </main>
+
+  <footer>Powered by sunoapi.org · Files are kept by the provider for 14 days — download what you like.</footer>
+  <script src="app.js"></script>
+</body>
+</html>
